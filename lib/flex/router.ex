@@ -23,7 +23,7 @@ defmodule Flex.Router do
       Logger.warn("Controllers path '#{controllers_path}' does not exist or is not a directory")
       []
     else
-      app_name = Application.get_env(:flex, :otp_app) |> to_string() |> Macro.camelize()
+      app_name = Application.get_env(:flex_web, :otp_app) |> to_string() |> Macro.camelize()
 
       controllers_path
       |> File.ls!()

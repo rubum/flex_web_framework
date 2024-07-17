@@ -3,7 +3,7 @@ defmodule Flex.Application do
   require Logger
 
   def start(_type, _args) do
-    port = Application.get_env(:flex, :port, 4000)
+    port = Application.get_env(:flex_web, :port, 4000)
     url = "http://localhost:#{port}"
 
     cowboy_options = [port: port, dispatch: dispatch()]
@@ -50,12 +50,12 @@ defmodule Flex.Application do
   end
 
   def controllers_path do
-    Application.get_env(:flex, :controllers_path) ||
+    Application.get_env(:flex_web, :controllers_path) ||
       raise "Flex :controllers_path is not configured"
   end
 
   def templates_path do
-    Application.get_env(:flex, :templates_path) ||
+    Application.get_env(:flex_web, :templates_path) ||
       raise "Flex :templates_path is not configured"
   end
 

@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Flex.Prod do
     Mix.env(:prod)
     {opts, _, _} = OptionParser.parse(args, switches: [port: :integer])
 
-    Application.put_env(:flex, :port, opts[:port] || 4000)
+    Application.put_env(:flex_web, :port, opts[:port] || 4000)
 
     Mix.Task.run("run", ["--no-halt" | args])
   end

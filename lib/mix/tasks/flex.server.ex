@@ -15,7 +15,7 @@ defmodule Mix.Tasks.Flex.Server do
     {opts, _, _} = OptionParser.parse(args, strict: [port: :integer])
     port = opts[:port] || 4100
 
-    Application.put_env(:flex, :port, port)
+    Application.put_env(:flex_web, :port, port)
 
     Mix.Task.run("run", run_args() ++ ["--no-halt"])
   end

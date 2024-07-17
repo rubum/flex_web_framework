@@ -59,7 +59,7 @@ Add Flex to your `mix.exs` dependencies:
 ```elixir
 def deps do
   [
-    {:flex, "~> 0.1.0"},
+    {:flex_web, "~> 0.1.0"},
     {:file_system, "~> 0.2"},
     {:jason, "~> 1.2"},
   ]
@@ -125,7 +125,7 @@ Place your static files in the `priv/static` directory. They will be automatical
 Configure Flex in your `config/config.exs`:
 
 ```elixir
-config :flex,
+config :flex_web,
   port: 4000,
   static_path: Path.join(File.cwd!, "priv/static"),
   templates_path: Path.join(File.cwd!, "lib/templates")
