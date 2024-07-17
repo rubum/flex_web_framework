@@ -3,7 +3,7 @@ defmodule Flex.MixProject do
 
   def project do
     [
-      app: :flex,
+      app: :flex_web,
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
