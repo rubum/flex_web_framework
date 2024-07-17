@@ -116,10 +116,6 @@ Example template (`lib/templates/home.html.eex`):
 <p><%= @message %></p>
 ```
 
-### Static Files
-
-Place your static files in the `priv/static` directory. They will be automatically served.
-
 ### Configuration
 
 Configure Flex in your `config/config.exs`:
