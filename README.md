@@ -59,7 +59,9 @@ Add Flex to your `mix.exs` dependencies:
 ```elixir
 def deps do
   [
-    {:flex, "~> 0.1.0"}
+    {:flex, "~> 0.1.0"},
+    {:file_system, "~> 0.2"},
+    {:jason, "~> 1.2"},
   ]
 end
 ```
@@ -88,8 +90,7 @@ Visit `http://localhost:4000` in your browser to see your Flex application in ac
 
 ```elixir
 defmodule MyApp.Controllers.HomeController do
-  use Flex.Routes
-  use Flex.Response
+  use Flex.Controller
 
   defroute :index, "/" do
     html_response(conn, "home.html.eex", %{message: "Welcome to Flex!"})
