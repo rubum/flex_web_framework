@@ -141,7 +141,7 @@ We welcome contributions to Flex! Please see our CONTRIBUTING.md for details on 
 
 ## License
 
-Distributed under the MIT License.
+Distributed under the MIT License. See (LICENSE)[https://github.com/rubum/flex/blob/main/LICENSE] for more information.
 
 ##
 
