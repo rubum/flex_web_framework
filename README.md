@@ -146,6 +146,6 @@ Distributed under the MIT License. See [LICENSE](https://github.com/rubum/flex/b
 
 ##
 
-<p align="center">Made with ❤️ by the Flex Team</p>
+<p align="center">Made with ❤️ by the Flex Web Team</p>
 
 
