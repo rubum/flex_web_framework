@@ -12,14 +12,14 @@
 </p>
 
 <p align="center">
-  <a href="https://hex.pm/packages/flex">
-    <img src="https://img.shields.io/hexpm/v/flex.svg" alt="Hex version"/>
+  <a href="https://hex.pm/packages/flex_web">
+    <img src="https://img.shields.io/hexpm/v/flex_web.svg" alt="Hex version"/>
   </a>
-  <a href="https://hexdocs.pm/flex">
+  <a href="https://hexdocs.pm/flex_web">
     <img src="https://img.shields.io/badge/hex-docs-brightgreen.svg" alt="Hex Docs"/>
   </a>
-  <!-- <a href="https://github.com/your-repo/flex/actions">
-    <img src="https://github.com/your-repo/flex/workflows/CI/badge.svg" alt="CI Status"/>
+  <!-- <a href="https://github.com/rubum/flex_web/actions">
+    <img src="https://github.com/rubum/flex_web/workflows/CI/badge.svg" alt="CI Status"/>
   </a> -->
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"/>
