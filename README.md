@@ -39,7 +39,7 @@
 
 ## Introduction
 
-Flex is a lightweight and flexible web framework for Elixir, designed to make web development a breeze. Inspired by the simplicity of Sinatra and powered by the robustness of Elixir, Flex provides developers with an intuitive API for building scalable web applications quickly and efficiently.
+Flex is a lightweight and flexible web framework for Elixir, designed to make web development a breeze. Inspired by the simplicity of Flex and powered by the robustness of Elixir, Flex provides developers with an intuitive API for building scalable web applications quickly and efficiently.
 
 ## Features
 
