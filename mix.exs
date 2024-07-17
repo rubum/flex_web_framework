@@ -12,7 +12,7 @@ defmodule Flex.MixProject do
       description: description(),
       package: package(),
       name: "Flex",
-      source_url: "https://github.com/yourusername/flex"
+      source_url: "https://github.com/rubum/flex"
     ]
   end
 
