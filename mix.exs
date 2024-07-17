@@ -46,8 +46,9 @@ defmodule Flex.MixProject do
 
   defp package do
     [
+      name: "flex_web",
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/yourusername/flex"}
+      links: %{"GitHub" => "https://github.com/rubum/flex"}
     ]
   end
 end
