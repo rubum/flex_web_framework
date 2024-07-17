@@ -1,0 +1,12 @@
+defmodule <%= @module %>.Controllers.HomeController do
+  use Flex.Routes
+  use Flex.Response
+
+  defroute :index, "/" do
+    html_response(conn, "home.html.eex", %{message: "Welcome to Flex!"})
+  end
+
+  defroute :about, "/about" do
+    html_response(conn, "about.html.eex", %{message: "About Flex"})
+  end
+end

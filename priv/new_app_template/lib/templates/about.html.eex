@@ -1,0 +1,6 @@
+<h1><%= @title %></h1>
+<p>This is an example about page for your Flex application.</p>
+<nav>
+    <a href="/">Home</a> |
+    <a href="/about">About</a>
+</nav>

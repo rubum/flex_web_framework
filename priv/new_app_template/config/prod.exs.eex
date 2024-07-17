@@ -1,0 +1,7 @@
+import Config
+
+# Configure the port for production
+config :flex, port: 8080
+
+# Do not print debug messages in production
+config :logger, level: :info
