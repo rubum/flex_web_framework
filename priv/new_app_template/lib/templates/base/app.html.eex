@@ -8,8 +8,8 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
+            text-align: center;
+            padding: 10%;
         }
     </style>
 </head>
@@ -21,7 +21,7 @@
         <%= @main_content %>
     </main>
     <footer>
-        <p>&copy; <%= DateTime.utc_now().year %> Flex App</p>
+        <p>&copy; <%= DateTime.utc_now().year %> Flex Web App</p>
     </footer>
 </body>
 </html>

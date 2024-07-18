@@ -20,11 +20,13 @@ defmodule Mix.Tasks.Flex.Server do
     Mix.Task.run("run", run_args() ++ ["--no-halt"])
   end
 
+  # ------- Private -------
+
   defp run_args do
     if iex_running?(), do: [], else: ["--no-halt"]
   end
 
   defp iex_running? do
-    Code.ensure_loaded?(IEx) && IEx.started?
+    Code.ensure_loaded?(IEx) && IEx.started?()
   end
 end
