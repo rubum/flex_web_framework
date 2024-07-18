@@ -2,6 +2,20 @@ defmodule Mix.Tasks.Flex.New do
   use Mix.Task
   import Mix.Generator
 
+  @shortdoc "Creates a new Flex project"
+
+  @moduledoc """
+  Creates a new Flex project.
+  It expects the path of the project as an argument.
+
+      mix flex.new PATH [--module MODULE] [--app APP]
+
+  A project at the given PATH will be created. The
+  application name and module name will be retrieved
+  from the path, unless `--module` or `--app` is given.
+  """
+
+  @switches [app: :string, module: :string]
   @template_path Path.expand("../../../priv/new_app_template", __DIR__)
 
   @impl Mix.Task

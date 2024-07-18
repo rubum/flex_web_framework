@@ -11,6 +11,7 @@ defmodule Flex.MixProject do
       aliases: aliases(),
       description: description(),
       package: package(),
+      docs: docs(),
       name: "Flex",
       source_url: "https://github.com/rubum/flex"
     ]
@@ -48,7 +49,19 @@ defmodule Flex.MixProject do
     [
       name: "flex_web",
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/rubum/flex"}
+      links: %{"GitHub" => "https://github.com/rubum/flex"},
+      files: ~w(lib priv .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      name: "Flex",
+      source_ref: "v#{@version}",
+      canonical: "http://hexdocs.pm/flex_web",
+      source_url: @source_url,
+      extras: ["README.md", "CHANGELOG.md"]
     ]
   end
 end
