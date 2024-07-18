@@ -54,19 +54,10 @@ Flex is a lightweight and flexible web framework for Elixir, designed to make we
 
 ## Installation
 
-Add Flex to your `mix.exs` dependencies:
-
-```elixir
-def deps do
-  [
-    {:flex_web, "~> 0.1.0"},
-    {:file_system, "~> 0.2"},
-    {:jason, "~> 1.2"},
-  ]
-end
+Install Flex with:
+```elixir 
+mix archive.install hex flex_web
 ```
-
-Then run `mix deps.get` to install the dependency.
 
 ## Quick Start
 
