@@ -100,6 +100,16 @@ end
 ### Templates
 Flex uses EEx for templating. Templates are located in the `lib/templates` directory.
 
+You can use base html templates like the `app.html.eex` generated in the `lib/templates/base` folder. 
+For the content from other templates to be placed inside the base template, ensure the `@main_content`
+exists in the base, like:
+
+```elixir
+<main>
+  <%= @main_content %>
+</main>
+```
+
 Example template (`lib/templates/home.html.eex`):
 
 ```elixir
