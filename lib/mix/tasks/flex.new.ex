@@ -16,7 +16,6 @@ defmodule Mix.Tasks.Flex.New do
   """
 
   @switches [app: :string, module: :string]
-  @flex_template_path Path.expand("../../../priv/new_app_template", __DIR__)
 
   def run(args) do
     {opts, argv} = OptionParser.parse!(args, strict: @switches)
@@ -112,7 +111,24 @@ defmodule Mix.Tasks.Flex.New do
     end
   end
 
-  defp paths, do: [@flex_template_path]
+  defp paths do
+    archives_path = Mix.path_for(:archives)
+    flex_path = find_flex_archive(archives_path)
+    [Path.join([flex_path, "priv", "new_app_template"])]
+  end
+
+  defp find_flex_archive(archives_path) do
+    case File.ls(archives_path) do
+      {:ok, files} ->
+        Enum.find_value(files, fn file ->
+          if String.starts_with?(file, "flex_web") do
+            Path.join([archives_path, file, file])
+          end
+        end)
+      {:error, _} ->
+        Mix.raise("Could not find Flex archive. Please ensure it's installed.")
+    end
+  end
 
   defp copy_from(paths, target_dir, binding, mapping) when is_list(mapping) do
     for {format, source, target} <- mapping do
