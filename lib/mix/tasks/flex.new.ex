@@ -83,7 +83,7 @@ defmodule Mix.Tasks.Flex.New do
         mix deps.get
         mix flex.server
 
-    Good luck!
+    Happy flexing!
     """)
   end
 

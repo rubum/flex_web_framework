@@ -84,14 +84,17 @@ defmodule MyApp.Controllers.HomeController do
   use Flex.Controller
 
   defroute :index, "/" do
+    _ = params
     html_response(conn, "home.html.eex", %{message: "Welcome to Flex!"})
   end
 
   defroute :about, "/about" do
+    _ = params
     html_response(conn, "about.html.eex", %{})
   end
 
   defroute :api_example, "/api/example", methods: [:get] do
+    _ = params
     json_response(conn, %{message: "This is a JSON response"})
   end
 end
