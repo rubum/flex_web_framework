@@ -38,7 +38,7 @@ defmodule Flex.Application do
   Returns the dispatch configuration for Cowboy.
   """
   def dispatch do
-    flex_router_opts = Flex.Router.init([])
+    flex_router_opts = []
 
     [
       {:_,
@@ -57,34 +57,5 @@ defmodule Flex.Application do
   def templates_path do
     Application.get_env(:flex_web, :templates_path) ||
       raise "Flex :templates_path is not configured"
-  end
-
-  @doc """
-  Reloads all controllers. Useful for development and testing.
-  """
-  def reload_controllers do
-    controllers_path()
-    |> File.ls!()
-    |> Enum.filter(&String.ends_with?(&1, "_controller.ex"))
-    |> Enum.each(fn file ->
-      module =
-        file
-        |> Path.rootname()
-        |> Macro.camelize()
-        |> (&"Elixir.#{&1}").()
-        |> String.to_atom()
-
-      :code.purge(module)
-      :code.delete(module)
-      Code.compile_file(Path.join(controllers_path(), file))
-    end)
-
-    # Clear the routes cache
-    :persistent_term.erase(:flex_compiled_routes)
-
-    # Reinitialize the router
-    Flex.Router.init([])
-
-    :ok
   end
 end

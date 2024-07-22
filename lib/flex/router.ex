@@ -1,74 +1,70 @@
 defmodule Flex.Router do
-  use Plug.Router
-  require Logger
+  import Plug.Router
 
-  plug :match
-  plug :dispatch
+  def init(opts), do: opts
 
-  def init(opts) do
-    routes = discover_and_compile_routes()
-    Keyword.put(opts, :routes, routes)
+  defmacro __using__(_opts) do
+    quote do
+      use Plug.Router
+
+      import Flex.Router
+
+      plug(Plug.Parsers,
+        parsers: [:urlencoded, :multipart, :json],
+        pass: ["*/*"],
+        json_decoder: Jason
+      )
+
+      plug(:match)
+      plug(:dispatch)
+
+      @before_compile Flex.Router
+    end
   end
 
-  def call(conn, opts) do
-    routes = Keyword.get(opts, :routes, [])
-    conn = Plug.Conn.assign(conn, :flex_routes, routes)
-    super(conn, opts)
+  defmacro __before_compile__(_env) do
+    quote do
+      match _ do
+        send_resp(var!(conn), 404, "Not found")
+      end
+    end
   end
 
-  defp discover_and_compile_routes do
-    controllers_path = Flex.Application.controllers_path()
+  defmacro defroute(action, path, options \\ [], do: block) do
+    quote do
+      def do_route(var!(conn) = conn, unquote(path), unquote(action)) do
+        unquote(block)
+      end
 
-    if not File.dir?(controllers_path) do
-      Logger.warn("Controllers path '#{controllers_path}' does not exist or is not a directory")
-      []
-    else
-      app_name = Application.get_env(:flex_web, :otp_app) |> to_string() |> Macro.camelize()
+      defp match_route(unquote(path), conn) do
+        var!(conn) = merge_params(conn)
 
-      controllers_path
-      |> File.ls!()
-      |> Enum.filter(&String.ends_with?(&1, "_controller.ex"))
-      |> Enum.flat_map(fn file ->
-        module =
-          file
-          |> Path.rootname()
-          |> Macro.camelize()
-          |> (&"Elixir.#{app_name}.Controllers.#{&1}").()
-          |> String.to_atom()
+        var!(conn) = %{
+          var!(conn)
+          | private:
+              Map.merge(var!(conn).private, %{
+                flex_controller: __MODULE__,
+                flex_action: unquote(action)
+              })
+        }
 
-        try do
-          Code.ensure_loaded!(module)
+        do_route(var!(conn), unquote(path), unquote(action))
+      end
 
-          if function_exported?(module, :__flex_routes__, 0) do
-            module.__flex_routes__()
-            |> Enum.map(fn {action, path, options} ->
-              {module, action, path, options}
-            end)
-          else
-            Logger.warn("Controller #{inspect(module)} does not have __flex_routes__/0 function")
-            []
-          end
-        rescue
-          e ->
-            Logger.error("Failed to load controller #{inspect(module)}: #{inspect(e)}")
-            []
-        end
+      methods = unquote(options)[:methods] || [:get]
+
+      Enum.each(methods, fn method ->
+        match(unquote(path), via: method, do: match_route(unquote(path), var!(conn)))
       end)
     end
   end
 
-  match _ do
-    routes = conn.assigns[:flex_routes] || []
-    path = conn.request_path
-    method = conn.method |> String.downcase() |> String.to_atom()
+  def merge_params(conn) do
+    merged_params =
+      Map.merge(conn.params, conn.path_params)
+      |> Map.merge(conn.query_params || %{})
+      |> Map.merge(conn.body_params || %{})
 
-    case Enum.find(routes, fn {_, _, route_path, options} ->
-      route_path == path && method in (options[:methods] || [:get])
-    end) do
-      {module, action, _, _} ->
-        apply(module, action, [conn, conn.params])
-      nil ->
-        send_resp(conn, 404, "Not found")
-    end
+    %{conn | params: merged_params}
   end
 end
